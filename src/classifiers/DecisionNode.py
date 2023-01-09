@@ -20,17 +20,32 @@ class DecisionNode:
             print(f"{self.id}: Leaf node")
             self.leaf=True
             # print(self.data)
-            self.label=self.data[target_feature][self.data[target_feature].index[0]]
+            # self.label=self.data[target_feature][self.data[target_feature].index[0]]
+            self.label=self.data[target_feature].value_counts().idxmax()
+            # print(self.label)
             # print("start lable")
             # print(self.label)
             # print("end lable")
-    def genTree(self,features:list[str]):
+    def genTree(self,features:list[str],depth:int):
+        # print(f"id:{self.id}, depth:{depth}")
         if self.leaf==True:
             return
+        if depth==0:
+            # print(f"Max depth id={self.id}")
+            self.leaf=True
+            self.label=self.data[target_feature].value_counts().idxmax()
+            # print(self.label)
+            return
         self.features=features
-        self.conditions=self.conditions(features)
-        chose=np.random.randint(len(self.conditions),size=1)[0]
-        self.condition=self.conditions[chose]
+        self.conds=self.conditions(features)
+        chose=np.random.randint(len(self.conds),size=1)[0]
+        self.condition=self.conds[chose]
+        if self.condition[1]<=0.1 and False:
+            print(f"Low IG id={self.id}")
+            self.leaf=True
+            self.label=self.data[target_feature].value_counts().idxmax()
+            # print(self.label)
+            return
         self.leftChild=DecisionNode(self,2*self.id+1)
         self.rightChild=DecisionNode(self,2*self.id+2)
         ldata,rdata=self.split(self.condition[0],self.condition[1])
@@ -38,8 +53,8 @@ class DecisionNode:
         # print(ldata,rdata,sep='\n')
         self.leftChild.feed(ldata)
         self.rightChild.feed(rdata)
-        self.leftChild.genTree(self.features)
-        self.rightChild.genTree(self.features)
+        self.leftChild.genTree(self.features,depth-1)
+        self.rightChild.genTree(self.features,depth-1)
         # self.leftChild.feed(ldata[features],ldata[target_featrue])
         # self.rightChild.feed(rdata[features],rdata[target_featrue])
     
