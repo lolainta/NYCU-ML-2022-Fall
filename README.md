@@ -1,10 +1,18 @@
 # Term Project #1
 
 >   Introduction to Machine Learning
->
->   109550004 紀政良
 
-[ToC]
+- [Before Started](#before-started)
+- [Report](#report)
+  * [Introduction](#introduction)
+    + [Wine Quality Data Set](#wine-quality-data-set)
+    + [Sentiment Analysis On Movie Reviews](#sentiment-analysis-on-movie-reviews)
+  * [Data Preprocessing](#data-preprocessing)
+    + [Wine Quality Data Set](#wine-quality-data-set-1)
+    + [Sentiment Analysis On Movie Reviews](#sentiment-analysis-on-movie-reviews-1)
+  * [Decision Tree](#decision-tree)
+    + [Implementation](#implementation)
+  * [Evaluation](#evaluation)
 
 ## Before Started
 
@@ -71,32 +79,28 @@ To evaluate the performance of our decision tree model, I used a number of evalu
 
 The following confusion matrix shows the results of our decision tree model on the wine quality data set:
 
-
-
 ![image-20230109220955963](./images/ds1-result.png)
 
-From the confusion matrix, we can see that the model made a total of 307 predictions. Of these predictions, 0 were true positives for class 0, 306 were true negatives for class 0, 5 were false positives for class 0, and 302 were false negatives for class 0. Similarly, there were 0 true positives, 307 true negatives, 1 false positives, and 306 false negatives for class 1, and so on for each class.
+From the confusion matrix, we can see that the model made a total of $307$ predictions. Of these predictions, $0$ were true positives for class 0, $306$ were true negatives for class 0, $5$ were false positives for class 0, and $302$ were false negatives for class 0. Similarly, there were $0$ true positives, $307$ true negatives, $1$ false positives, and $306$ false negatives for class 1, and so on for each class.
 
 Using the values in the confusion matrix, we can compute a number of evaluation metrics to get a better understanding of the model's performance. The first metric we will consider is accuracy. Accuracy is the proportion of correct predictions made by the model, and is calculated as:
-$$
-\text{accuracy} = (\text{true positives} + \text{true negatives}) / \text{total predictions}
-$$
-For our model, the overall accuracy is $$0.5537$$. This means that the model was able to correctly classify $$55.37\%$$ of the instances in the test set.
+
+$$\text{accuracy} = \frac{\text{true positives} + \text{true negatives}}{\text{total predictions}}$$
+
+For our model, the overall accuracy is $0.5537$. This means that the model was able to correctly classify $0.5537$ of the instances in the test set.
 
 Another important evaluation metric is precision. Precision is the proportion of true positive predictions made by the model among all positive predictions. It is calculated as:
-$$
-\text{precision} = \text{true positives} / (\text{true positives} + \text{false positives})
-$$
-Recall, also known as sensitivity or true positive rate, is the proportion of true positive predictions made by the model among all actual positive instances in the dataset. It is calculated as:
-$$
-\text{recall} = \text{true positives} / (\text{true positives} + \text{false negatives})
-$$
 
+$$\text{precision} = \frac{\text{true positives}}{\text{true positives} + \text{false positives}}$$
+
+Recall, also known as sensitivity or true positive rate, is the proportion of true positive predictions made by the model among all actual positive instances in the dataset. It is calculated as:
+
+$$\text{recall} = \frac{\text{true positives}}{\text{true positives} + \text{false negatives}}$$
 
 Finally, the F1 score is the harmonic mean of precision and recall. It is calculated as:
-$$
-\text{F1 score} = 2 * (\text{precision} * \text{recall}) / (\text{precision} + \text{recall})
-$$
+
+$$\text{F1 score} = 2 * \frac{\text{precision} * \text{recall}}{\text{precision} + \text{recall}}$$
+
 In addition to the overall evaluation metrics, it is also useful to consider the performance of the model for each class individually. The following table shows the precision, recall, and F1 score for each class:
 
 | class | precision | recall | f1-score | support |
