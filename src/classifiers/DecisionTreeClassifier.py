@@ -8,7 +8,6 @@ class DecisionTreeClassifier(BaseClassifier):
         super().__init__(kwargs);
         self.root=DecisionNode(None,0,target_feature=self.target_feature)
         self.depth=depth
-        print(self.target_feature)
 
     def fit(self,X_train,y_train):
         super().fit(X_train,y_train)

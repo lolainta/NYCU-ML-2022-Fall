@@ -43,7 +43,7 @@ class DecisionNode:
         self.leftChild=DecisionNode(self,2*self.id+1,self.target_feature)
         self.rightChild=DecisionNode(self,2*self.id+2,self.target_feature)
         ldata,rdata=self.split(self.condition[0],self.condition[1])
-        # print(f"{self.id}: {self.condition},{self.maxig},{ldata.shape},{rdata.shape}")
+        print(f"{self.id}: {self.condition},{self.maxig},{ldata.shape},{rdata.shape}")
         self.leftChild.feed(ldata)
         self.rightChild.feed(rdata)
         self.leftChild.genTree(self.features,depth-1)

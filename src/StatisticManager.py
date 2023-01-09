@@ -6,11 +6,12 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.metrics import classification_report
 
 class StatisticManager:
-    def __init__(self):
-        pass
-    def evaluate(self,pred:pd.Series,true:pd.Series):
+    def __init__(self,target_feature):
+        self.target_feature=target_feature
+
+    def report(self,pred:pd.Series,true:pd.Series):
         self.pred=pred
-        self.true=true['class_cat']
+        self.true=true[self.target_feature]
         assert self.pred.size==self.true.size,f"{self.pred.shape},{self.true.shape}"
         self.size=self.pred.size
         self.accuracy()
@@ -32,10 +33,8 @@ class StatisticManager:
                 self.acc+=1
         self.acc*=100/self.size
         return self.acc
-    def crossValidate(self,clf:DecisionTreeClassifier,X:pd.DataFrame,y:pd.Series,cv:int=10):
-        X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.3)
-        ret=list()
-        for i in range(cv):
-            clf.fit(X_train,y_train)
-            y_pred=clf.predict(X_test)
-            self.evaluate(y_pred,y_test)
+    def evaluate(self,clf:DecisionTreeClassifier,X:pd.DataFrame,y:pd.Series,portion:float=0.3):
+        X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=portion)
+        clf.fit(X_train,y_train)
+        y_pred=clf.predict(X_test)
+        self.report(y_pred,y_test)
