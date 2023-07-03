@@ -16,7 +16,7 @@
 
 ## Before Started
 
--   Since I use IPython for this project, I wrote some usefull information is the notebook. If it is not clear enough in this report, please refer to the descriptions I wrote besides the source code.
+-   Since I use IPython for this project, I wrote some usefull information in the notebook. If it is not clear enough in this report, please refer to the descriptions I wrote besides the source code.
 -   This project is uploaded to [GitHub](https://github.com/lolainta/NYCU-ML-2022-Fall/tree/main)
 
 # Report
